@@ -1,0 +1,17 @@
+br\com\musica\classes\CursoGuitarra.class
+br\com\musica\excecoes\Excecoes.class
+br\com\musica\main\Main_Musica.class
+br\com\musica\classes\AvaliacaoSimples.class
+br\com\musica\classes\AvaliacaoNaoElegivel.class
+br\com\musica\classes\Curso.class
+br\com\musica\excecoes\Excecoes$ExcecaoDuracao.class
+br\com\musica\interfaces\Avaliacao.class
+br\com\musica\excecoes\Excecoes$ExcecaoProfessor.class
+br\com\musica\classes\GestaoCurso.class
+br\com\musica\classes\CursoPiano.class
+br\com\musica\classes\CursoMusicaFactory.class
+module-info.class
+br\com\musica\interfaces\IGestaoCurso.class
+br\com\musica\classes\CursoBateria.class
+br\com\musica\excecoes\Excecoes$ExcecaoSemCurso.class
+br\com\musica\excecoes\Excecoes$ExcecaoNumAlunos.class
