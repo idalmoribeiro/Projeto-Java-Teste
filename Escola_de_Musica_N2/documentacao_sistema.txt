@@ -1,0 +1,228 @@
+DOCUMENTACAO DO SISTEMA ESCOLA DE MUSICA N2
+
+1. Objetivo do sistema
+
+Este sistema foi criado para cadastrar, listar, pesquisar, atualizar, remover e executar cursos de uma escola de musica.
+Ele funciona em modo de console, ou seja, o usuario interage digitando opcoes e informacoes pelo teclado.
+
+A ideia principal e manter um controle simples dos cursos oferecidos pela escola, com cadastro por tipo de curso, dados do professor, quantidade de alunos e duracao.
+
+2. Visao geral do funcionamento
+
+Ao iniciar o programa, o sistema mostra um menu principal com as seguintes opcoes:
+
+1 - Cadastrar curso
+2 - Listar cursos
+3 - Pesquisar cursos
+4 - Atualizar curso
+5 - Remover curso
+6 - Executar curso
+0 - Sair
+
+Cada curso cadastrado recebe um ID automatico. Esse ID serve para identificar o curso nas operacoes de pesquisa, atualizacao, remocao e execucao.
+
+Os cursos ficam armazenados em memoria enquanto o programa esta aberto. Isso significa que, ao fechar o sistema, os dados cadastrados sao perdidos, pois nao existe salvamento em banco de dados ou arquivo externo.
+
+3. Estrutura principal do sistema
+
+O sistema esta organizado em classes com responsabilidades separadas:
+
+Main_Musica
+Classe principal responsavel por mostrar o menu e receber as escolhas do usuario.
+
+GestaoCurso
+Classe responsavel por guardar, listar, buscar, atualizar, remover e pesquisar os cursos cadastrados.
+
+Curso
+Classe base que representa os dados comuns de qualquer curso: nome, duracao, numero de alunos e professor.
+
+CursoGuitarra, CursoPiano e CursoBateria
+Classes especificas de cada tipo de curso. Cada uma herda de Curso, implementa os metodos de iniciar, encerrar e prova final, e usa a regra de elegibilidade para avaliacao.
+
+CursoMusicaFactory
+Classe responsavel por criar o tipo correto de curso com base na escolha do usuario e por validar os dados informados.
+
+Avaliacao, AvaliacaoSimples e AvaliacaoNaoElegivel
+Interface e classes usadas no momento da avaliacao final do curso.
+
+Excecoes
+Classe que agrupa excecoes personalizadas para informar erros de cadastro e validacao.
+
+4. Como o cadastro de cursos funciona
+
+Para cadastrar um curso, o usuario escolhe um tipo de curso entre:
+
+CursoGuitarra
+CursoPiano
+CursoBateria
+
+Depois disso, o sistema pede as seguintes informacoes:
+
+duracao do curso em meses
+numero de alunos
+nome do professor
+
+Antes de criar o curso, a fabrica de cursos valida os dados. As regras sao:
+
+o nome do curso nao pode ser invalido
+o nome do professor nao pode estar vazio
+a duracao deve estar entre 2 e 12 meses
+o numero de alunos deve ser maior que zero
+
+Se algum desses dados estiver incorreto, o sistema gera uma excecao e o cadastro nao e concluido.
+
+Quando o cadastro da certo, o curso recebe um ID automatico e passa a fazer parte da lista de cursos cadastrados.
+
+5. Como a listagem funciona
+
+Ao escolher a opcao de listar cursos, o sistema mostra todas as regras esperadas para os tipos de curso e depois exibe os cursos ja cadastrados.
+
+Cada curso aparece com:
+
+ID
+tipo do curso
+duracao em meses
+numero de alunos
+nome do professor
+
+Se nao existir nenhum curso cadastrado, o sistema informa isso ao usuario.
+
+6. Como a pesquisa funciona
+
+A pesquisa permite procurar cursos pelo nome do curso ou pelo nome do professor.
+
+O usuario digita um termo de busca, e o sistema compara esse termo com os cursos cadastrados. A busca nao diferencia maiusculas de minusculas.
+
+Exemplos de pesquisa:
+
+digitar "piano" para encontrar cursos do tipo CursoPiano
+digitar o nome de um professor para localizar todos os cursos ministrados por ele
+
+Se houver correspondencia, os cursos encontrados sao exibidos com seus dados completos.
+
+7. Como a atualizacao funciona
+
+Para atualizar um curso, o usuario informa primeiro o ID do curso que deseja alterar.
+
+Se o ID existir, o sistema pede novamente os dados do curso:
+
+tipo do curso
+duracao
+numero de alunos
+nome do professor
+
+Em seguida, o sistema substitui o curso antigo por um novo curso criado com os dados informados.
+
+Se o ID nao existir, o sistema informa que o curso nao foi encontrado.
+
+8. Como a remocao funciona
+
+A remocao tambem usa o ID do curso.
+
+O usuario informa o ID desejado e, se ele existir, o curso e removido da lista interna.
+
+Se o ID nao existir, o sistema mostra uma mensagem dizendo que o curso nao foi encontrado.
+
+9. Como a execucao do curso funciona
+
+A opcao "Executar curso" simula o andamento do curso escolhido.
+
+O fluxo e o seguinte:
+
+o usuario informa o ID do curso
+o sistema verifica se o curso existe
+o usuario decide se quer realizar a avaliacao final
+se escolher avaliar, a avaliacao final e executada nesse momento
+o curso e iniciado
+o curso e encerrado
+
+Se o usuario escolher fazer a avaliacao final, o sistema chama o metodo de prova final do curso.
+
+As classes de curso verificam se o curso esta apto para essa avaliacao. A regra usada e a seguinte:
+
+o curso pode fazer a prova final se tiver concluido pelo menos 75% da carga ou se possuir pelo menos 5 alunos
+
+Observacao importante sobre a implementacao atual:
+o percentual de carga concluida existe na classe base, mas nao e atualizado pelo fluxo do menu.
+Assim, no uso atual pelo console, a elegibilidade costuma depender do criterio de pelo menos 5 alunos.
+
+Se a regra for atendida, o sistema executa uma avaliacao simples e mostra a mensagem:
+
+"Avaliação final executada."
+
+Se a regra nao for atendida, o sistema mostra que a avaliacao nao esta disponivel e informa o motivo.
+
+10. Regras de validacao
+
+O sistema possui algumas validacoes importantes para evitar dados invalidos:
+
+duracao menor que 2 meses e rejeitada
+duracao maior que 12 meses e rejeitada
+numero de alunos menor ou igual a zero e rejeitado
+nome do professor vazio ou nulo e rejeitado
+tipo de curso diferente dos permitidos e rejeitado
+
+Essas validacoes ajudam a impedir o cadastro de cursos inconsistentes.
+
+11. Como os dados sao armazenados
+
+Os cursos sao guardados em uma estrutura em memoria chamada mapa, associando cada ID ao curso correspondente.
+
+Isso traz algumas caracteristicas importantes:
+
+os IDs sao sequenciais
+os cursos podem ser acessados rapidamente pelo ID
+a ordem de insercao e preservada na listagem
+
+Como o armazenamento e apenas em memoria, o sistema nao possui persistencia depois que o programa encerra.
+
+12. O que cada classe faz
+
+Main_Musica
+Controla a interface de menu e chama as operacoes do sistema.
+
+GestaoCurso
+Controla a lista de cursos cadastrados e executa as operacoes de CRUD e pesquisa.
+
+Curso
+Guarda os dados comuns dos cursos e concentra regras gerais, como a verificacao para prova final.
+
+CursoGuitarra
+Implementa os metodos de iniciar, encerrar e prova final do curso de guitarra.
+
+CursoPiano
+Implementa os metodos de iniciar, encerrar e prova final do curso de piano.
+
+CursoBateria
+Implementa os metodos de iniciar, encerrar e prova final do curso de bateria.
+
+CursoMusicaFactory
+Cria a instancia correta do curso e valida os dados antes da criacao.
+
+AvaliacaoSimples
+Mostra a mensagem de avaliacao executada com sucesso.
+
+AvaliacaoNaoElegivel
+Mostra a mensagem de que a avaliacao nao pode ser feita e explica o motivo.
+
+Excecoes
+Define mensagens padronizadas para erros de cadastro e validacao.
+
+13. Resumo do fluxo de uso
+
+Em um uso normal, o usuario faz o seguinte:
+
+abre o programa
+escolhe cadastrar um curso
+informa o tipo e os dados obrigatorios
+recebe um ID automatico
+pode listar, pesquisar, atualizar ou remover esse curso depois
+pode executar o curso e, se as regras forem atendidas, realizar a avaliacao final
+
+14. Observacoes importantes
+
+O sistema foi desenvolvido de forma simples, didatica e focada em demonstrar conceitos de programacao orientada a objetos.
+
+Ele usa heranca para organizar os tipos de curso, fabrica para criar os objetos corretos e excecoes personalizadas para tratar erros de entrada.
+
+Nao ha banco de dados, login, interface grafica ou armazenamento permanente. Tudo acontece pelo terminal e os dados existem somente durante a execucao do programa.

@@ -1,0 +1,107 @@
+F01 – Cadastrar Curso
+
+Persona: Coordenador da escola de música.  
+
+
+Jornada: 1. Montagem de turmas.  
+
+
+História de Usuário (H01): Como coordenador da escola de música, preciso criar um curso de algum instrumento disponível.  
+
+Critérios de Aceite:
+
+
+CA01: O sistema deve validar os campos de nome do curso, nome do professor, duração do curso e quantidade mínima de alunos.  
+
+
+CA02: O sistema deve alertar o usuário caso alguma propriedade seja inválida (conforme o documento de visão) e só prosseguir após a correção.  
+
+
+CA03: O sistema deve exibir uma mensagem de confirmação após o cadastro ser realizado corretamente.  
+
+F02 – Pesquisar Cursos
+
+Persona: Coordenador da escola de música.  
+
+
+Jornada: 2. Gerenciar Cursos.  
+
+
+História de Usuário (H02): Como coordenador da escola de música, preciso saber quais cursos estão em andamento.  
+
+Critérios de Aceite:
+
+
+CA01: É necessário o cadastro prévio de ao menos um curso; caso contrário, o sistema deve exibir uma mensagem de erro.  
+
+
+CA02: O sistema deve permitir cursos do mesmo instrumento e professor, diferenciando-os pelo ID.  
+
+
+CA03: A pesquisa deve retornar todos os dados: tipo, duração, quantidade de alunos e nome do professor.  
+
+
+CA04: A busca não deve diferenciar letras maiúsculas de minúsculas.  
+
+F03 – Atualizar Curso
+
+Persona: Coordenador da escola de música.  
+
+
+Jornada: 3. Edição de cursos.  
+
+
+História de Usuário (H03): Como coordenador da escola de música, preciso atualizar os dados do curso em casos de troca de professor, desistência de alunos ou mudança na duração.  
+
+Critérios de Aceite:
+
+
+CA01: O sistema deve solicitar o ID do curso; se o ID não existir, deve informar uma mensagem de erro.  
+
+
+CA02: Os novos dados inseridos devem ser validados conforme as regras de negócio.  
+
+
+CA03: Após a atualização, o sistema deve emitir uma mensagem de sucesso.  
+
+F04 – Executar Curso
+
+Persona: Coordenador da escola de música.  
+
+
+Jornada: 3. Realização de provas.  
+
+
+História de Usuário (H04): Como aluno da escola de música, preciso realizar provas para obter uma certificação de conclusão.  
+
+Critérios de Aceite:
+
+
+CA01: O sistema deve validar o ID do curso e dar erro caso não esteja cadastrado.  
+
+
+CA02: O sistema deve validar se a duração atingiu 75% e se há a quantidade mínima de alunos para a avaliação.  
+
+
+CA03: Deve exibir erro caso a validação não atenda às regras de negócio.  
+
+
+CA04: Deve exibir mensagem de sucesso caso a validação da avaliação seja bem-sucedida.  
+
+F04 (ou F05) – Remover Curso
+
+Persona: Coordenador da escola de música.  
+
+
+Jornada: 3. Remoção de curso.  
+
+
+História de Usuário (H05): Como coordenador da escola de música, preciso remover cursos do registro.  
+
+Critérios de Aceite:
+
+
+CA01: O sistema deve validar o ID do curso e informar erro se o número não for encontrado.  
+
+
+CA02: O sistema deve informar uma mensagem de sucesso após a confirmação da remoção
